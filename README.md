@@ -48,9 +48,9 @@ The program uses the Seaborn Tips Dataset, available here:
 
 ## **My learnings and contributions**
 
-Even though the app has only ~150 lines of code as of writing (will probably remain like that 😒) it is dense with information. I learned how laplace smoothing works (basically just use logarihms because sums are better than products, and computers are not good with numbers that are extremely small).
+Even though the app has only ~150 lines of code as of writing (will probably remain like that 😒) it is dense with information. I learned what Laplace smoothing is: add a little count to avoid zeros, use logs because sums > products and tiny numbers hate computers lol.
 
-The program is weird beccause if we change a tiny number, the accuracy can skyrocket, but the data would be flawed I assume. What I mean by this is that if we change what we consider as a high tip (let's say a high tip is 25% or more extra) we would get an above 90% accuracy easily, because almost no data would be high tipping anymore. I chose a middle point, 15%, that gives us a realistic accuracy of like 63-64%.
+The program is weird because if we change a tiny number, the accuracy can skyrocket, but the data would be flawed I assume. What I mean by this is that if we change what we consider as a high tip (let's say a high tip is 25% or more extra) we would get an above 90% accuracy easily, because almost no data would be high tipping anymore. I chose a middle point, 15%, that gives us a realistic accuracy of like 63-64%.
 
 I did not test what accuracies I would get without Laplace smoothing, sorry.
 
