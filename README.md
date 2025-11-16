@@ -93,7 +93,7 @@ You can clearly see that the first line of the .csv file contains the formatting
 
 - Wikipedia page on Naive Bayes
 - The Seaborn Tips dataset
-- A YouTube video / paper about Gaussian NB
+- 3Blue1Brown (https://www.youtube.com/watch?v=HZGCoVF3YvM)
 - The course slides
 
 ## **Conclusion**
