@@ -8,9 +8,47 @@ The program uses basic python features to store the data (dictionaries and lists
 
 It takes in the csv, parses it and splits the data (separated by a comma) into an array of parameters.
 
+### A bit about each function (the code is too short not to write this)
+
+- ReadData() → Opens the .csv file and parses it.
+- SplitData() → splits the data into training data and testing data, with an implicit ratio of 80% training data.
+- TrainParams() → Trains the "AI" parameters and returns them as dictionaries.
+- Predict() → Given a data line, predicts if it is more likely to be high tipping or low tipping.
+- Evaluate() → Just Takes the trained parameters and testing data and checks how many does the AI predict wrong/right
+- main.py → just calls the functions above and takes the mean of 1000 evaluations to measure accuracy, then we print it out.
+
+### **The Naive Bayes Model (very short explanation)**
+
+For a given class $Y \in \{0,1\}$ and features $X_1, X_2, \dots, X_n$:
+
+$$
+P(Y \mid X_1, \dots, X_n) \propto P(Y) \prod_{i} P(X_i \mid Y)
+$$
+
+- $P(Y)$ = prior probability (how often high/low tips appear in the data)
+- $P(X_i \mid Y)$ = likelihood of each feature given the class
+
+For continuous features, we used the Gaussian probability density function:
+
+$$
+p(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left( -\frac{(x - \mu)^2}{2\sigma^2} \right)
+$$
+
+This lets us model numeric things like total bill or group size smoothly.
+
+### **Dataset Used**
+
+The program uses the Seaborn Tips Dataset, available here:
+
+👉 https://www.kaggle.com/datasets/ranjeetjain3/seaborn-tips-dataset
+
+(You can download it as CSV and place it next to the script.)
+
+---
+
 ## **My learnings and contributions**
 
-Even though the app has only ~150 lines of code as of writing (will probably remain like that 😒) it is dense with information. I learned how laplace smoothing works (basically just use logarihms because sums are better than products, and computers are not good with numbers extremely small).
+Even though the app has only ~150 lines of code as of writing (will probably remain like that 😒) it is dense with information. I learned how laplace smoothing works (basically just use logarihms because sums are better than products, and computers are not good with numbers that are extremely small).
 
 The program is weird beccause if we change a tiny number, the accuracy can skyrocket, but the data would be flawed I assume. What I mean by this is that if we change what we consider as a high tip (let's say a high tip is 25% or more extra) we would get an above 90% accuracy easily, because almost no data would be high tipping anymore. I chose a middle point, 15%, that gives us a realistic accuracy of like 63-64%.
 
@@ -22,6 +60,7 @@ Fun fact! Mathemathics wikipedia articles are very badly written. I am _TERRIBLE
 
 TL;DR:
 
+- Computers love numbers :D
 - +3% gain from adding an "is_weekend" parameter;
 - I used laplace smoothing but didnt record changes w/o it;
 - Wikipedia bad, chatgpt good if you know how to use it properly;
@@ -40,8 +79,27 @@ To run:
 python3 main.py
 ```
 
+## How to change stuff and tinker with the program
+
 It is a simple cli interface, and if you want to change some parameters you need to scavange my code, sorry.
+
+If you want to change what % is ok for a tip, ctrl+f on "0.15" and change that to whatever you want in both places. (TODO: add this as an argument maybe)
+
+If you want to have a 50/50 split of tests and training, you can do that, just call the function SplitData with the paramenter ratio altered.
+
+You can clearly see that the first line of the .csv file contains the formatting of data, respect it. Otherwise, you can add whatever you want there.
+
+## **Refferences**
+
+- Wikipedia page on Naive Bayes
+- The Seaborn Tips dataset
+- A YouTube video / paper about Gaussian NB
+- The course slides
 
 ## **Conclusion**
 
 I think this project was cool, even though small, it made me appreciate the ammount of information that you can extract from something so simple.
+
+In retrospect, I should have chosen a bigger dataset, but I found out that extracting most out of a tiny dataset is a _much_ bigger challenge.
+
+Thanks for reading! <3
